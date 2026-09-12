@@ -1,16 +1,28 @@
+import random
 class Blackjack():
-    Machine_points = 0
     def __init__(self):
-        self.points = 0
+        self.player_points = 0
+        self.machine_points = 0
+        self.player_hand = []
+        self.machine_hand = []
+        deck_of_cards = self.build_deck
+
+    def build_deck(self):
+        suits = ['Spades', 'Clubs', 'Hearts', 'Diamonds']
+        numbers = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
+        return [(s, n) for s in suits for n in numbers]
+
 
     def Hit(self):
-        pass
+        card = random.choice(self.cards)
+        self.Deck_of_Cards.remove(card)
+        hand += self.Deck_of_Cards(card)
 
     def Stay(self):
         pass
 
     def Restart(self):
-        pass
+        self.hand = 0
 
     def Show_Points(self):
         pass
