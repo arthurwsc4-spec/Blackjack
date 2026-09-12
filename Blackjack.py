@@ -15,12 +15,17 @@ class Blackjack():
 
     def Hit(self):
         card = random.choice(self.deck_of_cards)
-        self.player_hand.append(card[1])
+        self.player_hand.append(card)
         self.deck_of_cards.remove(card)
 
-    def calcule_points(self):
+    def calculate_points(self, who="player"):
         total_points = 0
-        for elem in self.player_hand:
+        if who == "player":
+            hand = self.player_hand
+        else:
+            hand = self.machine_hand
+
+        for elem in hand:
             try:
                 total_points += int(elem[1])
             except:
@@ -28,16 +33,18 @@ class Blackjack():
                     return (total_points + 1, total_points + 11)
                 else:
                     return total_points + 10
+        return total_points, who
 
-    def Stay(self):
+    def Stay(self): #turns to machine play
         pass
 
     def Restart(self):
-        self.hand = 0
-        self.deck_of_cards = self.build_deck
+        self.player_hand = []
+        self.machine_hand = []
+        self.deck_of_cards = self.build_deck()
 
     def Show_Points(self):
-        pass
+        print(f"{self.calculate_points()[1]} points: {self.calculate_points()[0]}")
 
     def blackjack(self):
         pass #if hand == 21
