@@ -19,7 +19,15 @@ class Blackjack():
         self.deck_of_cards.remove(card)
 
     def calcule_points(self):
-        pass
+        total_points = 0
+        for elem in self.player_hand:
+            try:
+                total_points += int(elem[1])
+            except:
+                if elem[1] == "A":
+                    return (total_points + 1, total_points + 11)
+                else:
+                    return total_points + 10
 
     def Stay(self):
         pass
@@ -33,22 +41,3 @@ class Blackjack():
 
     def blackjack(self):
         pass #if hand == 21
-
-if __name__ == '__main__':
-    player = Blackjack()
-    game = input('Wanna play Blackjack? ')
-    if game == 'y':
-        if len(player.player_hand) > 1:
-            total = 0
-            for num in player.player_hand:
-                total += num
-            if total > 21:
-                player.player_hand = total
-                player.Stay()
-            else:
-                player.player_hand = total
-                option = input(f'Hand: {player.player_hand}. Want to hit or want to stay?')
-    else:
-        print('Oh, so sad, bye then!')
-
-#A == 1 or 11
