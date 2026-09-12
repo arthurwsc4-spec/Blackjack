@@ -18,7 +18,7 @@ class Blackjack():
         self.player_hand.append(card)
         self.deck_of_cards.remove(card)
 
-    def calculate_points(self, who="player"):
+    def calculate_hand_points(self, who="player"):
         total_points = 0
         if who == "player":
             hand = self.player_hand
@@ -43,8 +43,14 @@ class Blackjack():
         self.machine_hand = []
         self.deck_of_cards = self.build_deck()
 
-    def Show_Points(self):
-        print(f"{self.calculate_points()[1]} points: {self.calculate_points()[0]}")
+    def Show_Hand_Points(self):
+        print(f"{self.calculate_hand_points()[1]} points of your hand: {self.calculate_hand_points()[0]}")
 
     def blackjack(self):
         pass #if hand == 21
+
+    def bust(self):
+        pass #if hand > 21
+
+    def winner(self):
+        pass #decide who is the winner
