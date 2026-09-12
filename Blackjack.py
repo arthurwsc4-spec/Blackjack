@@ -14,16 +14,19 @@ class Blackjack():
         return [(s, n) for s in suits for n in numbers]
 
     def Hit(self):
-        card = random.choice(self.cards)
-        self.player_hand.append(int(card[1]))
+        card = random.choice(self.deck_of_cards)
+        self.player_hand.append(card[1])
         self.deck_of_cards.remove(card)
+
+    def calcule_points(self):
+        pass
 
     def Stay(self):
         pass
 
     def Restart(self):
         self.hand = 0
-        self.build_deck()
+        self.deck_of_cards = self.build_deck
 
     def Show_Points(self):
         pass
@@ -39,11 +42,13 @@ if __name__ == '__main__':
             total = 0
             for num in player.player_hand:
                 total += num
-            if num > 21:
-                player.player_hand == total
+            if total > 21:
+                player.player_hand = total
                 player.Stay()
             else:
-                player.player_hand == total
+                player.player_hand = total
                 option = input(f'Hand: {player.player_hand}. Want to hit or want to stay?')
     else:
         print('Oh, so sad, bye then!')
+
+#A == 1 or 11
