@@ -33,7 +33,7 @@ class Blackjack():
                 total_points += int(elem[1])
             except:
                 if elem[1] == "A":
-                    return (total_points + 1, total_points + 11)
+                    return (total_points + 1, total_points + 11)  # where will the second valu go? [list it maybe]
                 else:
                     return total_points + 10
         return total_points, who
