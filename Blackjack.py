@@ -11,7 +11,7 @@ class Blackjack():
     def build_deck(self):
         suits = ['Spades', 'Clubs', 'Hearts', 'Diamonds']
         numbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-        return [(s, n) for s in suits for n in numbers]
+        return [(s, n) for s in suits for n in numbers for _ in range(2)]
 
     def Hit(self):
         card = random.choice(self.deck_of_cards)
