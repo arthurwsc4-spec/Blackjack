@@ -3,27 +3,30 @@ import random
 class Blackjack():
     def __init__(self):
         self.player_points = 0
-        self.machine_points = 0
+        self.computer_points = 0
         self.player_hand = []
-        self.machine_hand = []
-        self.deck_of_cards = self.build_deck()
+        self.computer_hand = []
+        self.deck_of_cards = self.Build_Deck()
 
-    def build_deck(self):
+    def Build_Deck(self):
         suits = ['Spades', 'Clubs', 'Hearts', 'Diamonds']
         numbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         return [(s, n) for s in suits for n in numbers for _ in range(2)]
 
-    def Hit(self):
+    def Hit(self, who="player"):
         card = random.choice(self.deck_of_cards)
-        self.player_hand.append(card)
+        if who == "player":
+            self.player_hand.append(card)
+        else:
+            self.computer_hand.append(card)
         self.deck_of_cards.remove(card)
 
-    def calculate_hand_points(self, who="player"):
+    def Calculate_Hand_Points(self, who="player"):
         total_points = 0
         if who == "player":
             hand = self.player_hand
         else:
-            hand = self.machine_hand
+            hand = self.computer_hand
 
         for elem in hand:
             try:
@@ -35,36 +38,69 @@ class Blackjack():
                     return total_points + 10
         return total_points, who
 
-    def Stay(self): #turns to machine play
-        pass
+    def Stay(self):
+        while self.Calculate_Hand_Points(who="computer")[0] < 18:
+            self.Hit(who="computer")
+        if self.Calculate_Hand_Points(who="computer")[0] >= 18:
+            self.Winner()
+        else:
+            self.Hit(who="computer")
 
     def Restart(self):
         self.player_hand = []
-        self.machine_hand = []
-        self.deck_of_cards = self.build_deck()
+        self.computer_hand = []
+        self.deck_of_cards = self.Build_Deck()
 
     def Show_Hand_Points(self):
-        print(f"{self.calculate_hand_points()[1]} points of your hand: {self.calculate_hand_points()[0]}")
+        print(f"{self.Calculate_Hand_Points()[1]} points of your hand: {self.Calculate_Hand_Points()[0]}")
 
-    def blackjack(self, who="player"):
+    def Blackjack(self, who="player"):
         if who == "player":
-            if self.calculate_hand_points(who)[0] == 21:
+            if self.Calculate_Hand_Points(who)[0] == 21:
                 self.player_points += 1
         else:
-            if self.calculate_hand_points(who)[0] == 21:
-                self.machine_points += 1
+            if self.Calculate_Hand_Points(who)[0] == 21:
+                self.computer_points += 1
 
-    def bust(self, who="player"):
+    def Bust(self, who="player"):
         if who == "player":
-            points, person = self.calculate_hand_points(who)
+            points, person = self.Calculate_Hand_Points(who)
         else:
-            points, person = self.calculate_hand_points(who)
+            points, person = self.Calculate_Hand_Points(who)
 
         if points > 21:
             if person == "player":
                 self.player_points += 1
             else:
-                self.machine_points += 1
+                self.computer_points += 1
         
-    def winner(self):
-        pass #decide who is the winner
+    def Winner(self):
+        player, _ = self.Calculate_Hand_Points(who="player")
+        computer, c = self.Calculate_Hand_Points(who="computer")
+        winner_status = False
+
+        if player > 21:
+            self.Bust(who="player")
+            winner_status = True
+        if player == 21:
+            self.Blackjack(who="player")
+            winner_status = True
+
+        if computer > 21:
+            self.Bust(who="computer")
+            winner_status = True
+        if computer == 21:
+            self.Blackjack(who="computer")
+            winner_status = True
+
+        if not winner_status:
+            if player > computer:
+                self.player_points += 1
+            elif computer > player:
+                self.computer_points += 1
+            else:
+                print("It seems to be a Tie!")
+                self.Restart()
+        else:
+            print("We got a winner")
+            print("The score is: player = {self.player_points} and computer = {self.computer_points}")
