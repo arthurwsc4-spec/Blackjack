@@ -105,7 +105,7 @@ class Blackjack():
             print("We got a winner")
             print("The score is: player = {self.player_points} and computer = {self.computer_points}")
 
-if __name__ == "__main__": #testing 
+if __name__ == "__main__":
     player = Blackjack()
     print(player.Build_Deck)
     print()
@@ -121,6 +121,6 @@ if __name__ == "__main__": #testing
     print()
     print(player.Bust("computer"))
     print()
-    print(player.Winner)
+    print(player.Winner())
     print()
-    print(player.Restart)
+    print(player.Restart())
