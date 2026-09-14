@@ -54,7 +54,7 @@ class Blackjack():
     def Show_Hand_Points(self):
         print(f"{self.Calculate_Hand_Points()[1]} points of your hand: {self.Calculate_Hand_Points()[0]}")
 
-    def Blackjack(self, who="player"):
+    def blackjack(self, who="player"): #this is the only one in lower case so it makes harder to make confusions
         if who == "player":
             if self.Calculate_Hand_Points(who)[0] == 21:
                 self.player_points += 1
@@ -104,3 +104,23 @@ class Blackjack():
         else:
             print("We got a winner")
             print("The score is: player = {self.player_points} and computer = {self.computer_points}")
+
+if __name__ == "__main__": #testing 
+    player = Blackjack()
+    print(player.Build_Deck)
+    print()
+    print(player.Hit("player"))
+    print()
+    print(player.Calculate_Hand_Points("player"))
+    print()
+    print(player.Stay())
+    print()
+    print(player.Show_Hand_Points())
+    print()
+    print(player.blackjack("player"))
+    print()
+    print(player.Bust("computer"))
+    print()
+    print(player.Winner)
+    print()
+    print(player.Restart)
