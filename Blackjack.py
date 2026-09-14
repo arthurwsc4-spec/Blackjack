@@ -46,11 +46,25 @@ class Blackjack():
     def Show_Hand_Points(self):
         print(f"{self.calculate_hand_points()[1]} points of your hand: {self.calculate_hand_points()[0]}")
 
-    def blackjack(self):
-        pass #if hand == 21
+    def blackjack(self, who="player"):
+        if who == "player":
+            if self.calculate_hand_points(who)[0] == 21:
+                self.player_points += 1
+        else:
+            if self.calculate_hand_points(who)[0] == 21:
+                self.machine_points += 1
 
-    def bust(self):
-        pass #if hand > 21
+    def bust(self, who="player"):
+        if who == "player":
+            points, person = self.calculate_hand_points(who)
+        else:
+            points, person = self.calculate_hand_points(who)
 
+        if points > 21:
+            if person == "player":
+                self.player_points += 1
+            else:
+                self.machine_points += 1
+        
     def winner(self):
         pass #decide who is the winner
