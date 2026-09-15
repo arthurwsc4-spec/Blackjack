@@ -32,10 +32,12 @@ class Blackjack():
             try:
                 total_points += int(elem[1])
             except:
-                if elem[1] == "A":
-                    return (total_points + 1, total_points + 11)  # where will the second valu go? [list it maybe]
+                if total_points < 11:
+                    total_points += 11
+                elif elem[1] in ['J', 'Q', 'K']:
+                    total_points += 10
                 else:
-                    return total_points + 10
+                    total_points += 1
         return total_points, who
 
     def Stay(self):
