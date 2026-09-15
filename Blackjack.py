@@ -85,14 +85,14 @@ class Blackjack():
             self.Bust(who="player")
             winner_status = True
         if player == 21:
-            self.Blackjack(who="player")
+            self.blackjack(who="player")
             winner_status = True
 
         if computer > 21:
             self.Bust(who="computer")
             winner_status = True
         if computer == 21:
-            self.Blackjack(who="computer")
+            self.blackjack(who="computer")
             winner_status = True
 
         if not winner_status:
@@ -108,21 +108,4 @@ class Blackjack():
             print("The score is: player = {self.player_points} and computer = {self.computer_points}")
 
 if __name__ == "__main__":
-    player = Blackjack()
-    print(player.Build_Deck)
-    print()
-    print(player.Hit("player"))
-    print()
-    print(player.Calculate_Hand_Points("player"))
-    print()
-    print(player.Stay())
-    print()
-    print(player.Show_Hand_Points())
-    print()
-    print(player.blackjack("player"))
-    print()
-    print(player.Bust("computer"))
-    print()
-    print(player.Winner())
-    print()
-    print(player.Restart())
+    pass #make the game work
