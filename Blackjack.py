@@ -54,9 +54,9 @@ class Blackjack():
         self.deck_of_cards = self.Build_Deck()
 
     def Show_Hand_Points(self):
-        print(f"{self.Calculate_Hand_Points()[1]} points of your hand: {self.Calculate_Hand_Points()[0]}")
+        print(f"\nHand points of {self.Calculate_Hand_Points()[1]}: {self.Calculate_Hand_Points()[0]}")
 
-    def blackjack(self, who="player"): #this is the only one in lower case so it makes harder to make confusions
+    def blackjack(self, who="player"): #this is the only one in lower case so it makes harder to make confusions with the name of the class
         if who == "player":
             if self.Calculate_Hand_Points(who)[0] == 21:
                 self.player_points += 1
@@ -101,11 +101,33 @@ class Blackjack():
             elif computer > player:
                 self.computer_points += 1
             else:
-                print("It seems to be a Tie!")
+                print(f"{yellow}It seems to be a Tie!{reset}")
                 self.Restart()
         else:
-            print("We got a winner")
-            print("The score is: player = {self.player_points} and computer = {self.computer_points}")
+            print(f"\n\n{green}We got a winner!!{reset}")
+            print(f"\nThe score now is: player = {self.player_points} and computer = {self.computer_points}")
+
+#colors for the code
+red = '\033[91m'
+green = '\033[92m'
+yellow = '\033[33m'
+reset = '\033[0m'
 
 if __name__ == "__main__":
-    pass #make the game work
+    player = Blackjack()
+    play = input("Would you like to play Blackjack? (y or n) ")
+    if play == "y":
+        while True:
+            player.Show_Hand_Points()
+            move = input(f"What would you like to do? {green}Hit{reset} or {red}Stay{reset}? ").capitalize()
+            if "Hit" in move:
+                player.Hit()
+            elif "Stay" in move:
+                player.Stay()
+                again = input("Wanna play another round?")
+                if again == "y":
+                    continue
+                else:
+                    break
+            else:
+                print(f"{red}Move Unavailable, choose again.{reset}")
